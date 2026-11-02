@@ -64,6 +64,19 @@
     </section>
   </main>
 
+  <div class="details-backdrop" id="details-backdrop"></div>
+  <section class="details-modal" id="details-modal" role="dialog" aria-modal="true" aria-labelledby="details-name" aria-hidden="true">
+    <button class="details-close" id="details-close" aria-label="Close product details">×</button>
+    <div class="details-art" id="details-emoji" aria-hidden="true"></div>
+    <div class="details-copy">
+      <p class="product-category" id="details-category"></p>
+      <h2 id="details-name">Product name</h2>
+      <p class="details-description" id="details-description"></p>
+      <strong class="details-price" id="details-price"></strong>
+      <button class="add-button details-add" id="details-add">Add to cart</button>
+    </div>
+  </section>
+
   <div class="cart-backdrop" id="cart-backdrop"></div>
   <aside class="cart-panel" id="cart-panel" aria-label="Shopping cart" aria-hidden="true">
     <div class="cart-heading">
