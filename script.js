@@ -1,15 +1,16 @@
 const products = [
-  { id: 1, name: "Wireless Headphones", category: "Electronics", price: 1499, emoji: "🎧" },
-  { id: 2, name: "Smart Watch", category: "Electronics", price: 2199, emoji: "⌚" },
-  { id: 3, name: "Everyday Backpack", category: "Fashion", price: 999, emoji: "🎒" },
-  { id: 4, name: "Classic Sneakers", category: "Fashion", price: 1799, emoji: "👟" },
-  { id: 5, name: "Desk Lamp", category: "Home", price: 799, emoji: "💡" },
-  { id: 6, name: "Coffee Mug Set", category: "Home", price: 499, emoji: "☕" },
-  { id: 7, name: "Bluetooth Speaker", category: "Electronics", price: 1299, emoji: "🔊" },
-  { id: 8, name: "Travel Bottle", category: "Home", price: 349, emoji: "🧴" }
+  { id: 1, name: "Wireless Headphones", category: "Electronics", price: 1499, emoji: "🎧", description: "Enjoy your favourite music with these comfortable wireless headphones. A handy everyday choice for music, videos, and online classes." },
+  { id: 2, name: "Smart Watch", category: "Electronics", price: 2199, emoji: "⌚", description: "A stylish smart watch for keeping track of your daily activity and staying connected throughout the day." },
+  { id: 3, name: "Everyday Backpack", category: "Fashion", price: 999, emoji: "🎒", description: "Carry your books and daily essentials in this practical backpack, suitable for college, work, and short trips." },
+  { id: 4, name: "Classic Sneakers", category: "Fashion", price: 1799, emoji: "👟", description: "A versatile pair of everyday sneakers with a simple style that works for casual outings." },
+  { id: 5, name: "Desk Lamp", category: "Home", price: 799, emoji: "💡", description: "Brighten your study table or workspace with this neat and useful desk lamp." },
+  { id: 6, name: "Coffee Mug Set", category: "Home", price: 499, emoji: "☕", description: "A simple mug set for enjoying tea, coffee, or other favourite drinks at home." },
+  { id: 7, name: "Bluetooth Speaker", category: "Electronics", price: 1299, emoji: "🔊", description: "Listen to music and podcasts with this compact Bluetooth speaker, designed for everyday use." },
+  { id: 8, name: "Travel Bottle", category: "Home", price: 349, emoji: "🧴", description: "A reusable bottle that is convenient to carry to college, work, or while travelling." }
 ];
 
 let cart = [];
+let selectedProductId = null;
 
 const productGrid = document.getElementById("product-grid");
 const searchInput = document.getElementById("search-input");
@@ -44,10 +45,34 @@ function displayProducts() {
       <h3>${product.name}</h3>
       <div class="product-bottom">
         <span class="product-price">${formatPrice(product.price)}</span>
-        <button class="add-button" data-product-id="${product.id}">Add to cart</button>
+        <div class="product-actions">
+          <button class="view-details-button" data-action="details" data-product-id="${product.id}">Details</button>
+          <button class="add-button" data-action="add" data-product-id="${product.id}">Add to cart</button>
+        </div>
       </div>
     </article>
   `).join("");
+}
+
+function openProductDetails(productId) {
+  const product = products.find(item => item.id === productId);
+  if (!product) return;
+
+  selectedProductId = productId;
+  document.getElementById("details-emoji").textContent = product.emoji;
+  document.getElementById("details-category").textContent = product.category;
+  document.getElementById("details-name").textContent = product.name;
+  document.getElementById("details-description").textContent = product.description;
+  document.getElementById("details-price").textContent = formatPrice(product.price);
+
+  document.body.classList.add("details-open");
+  document.getElementById("details-modal").setAttribute("aria-hidden", "false");
+}
+
+function closeProductDetails() {
+  document.body.classList.remove("details-open");
+  document.getElementById("details-modal").setAttribute("aria-hidden", "true");
+  selectedProductId = null;
 }
 
 function addToCart(productId) {
@@ -116,7 +141,11 @@ function closeCart() {
 
 productGrid.addEventListener("click", event => {
   const button = event.target.closest("[data-product-id]");
-  if (button) addToCart(Number(button.dataset.productId));
+  if (!button) return;
+
+  const productId = Number(button.dataset.productId);
+  if (button.dataset.action === "details") openProductDetails(productId);
+  if (button.dataset.action === "add") addToCart(productId);
 });
 
 cartItems.addEventListener("click", event => {
@@ -135,6 +164,13 @@ categoryFilter.addEventListener("change", displayProducts);
 document.getElementById("cart-toggle").addEventListener("click", openCart);
 document.getElementById("close-cart").addEventListener("click", closeCart);
 document.getElementById("cart-backdrop").addEventListener("click", closeCart);
+document.getElementById("details-close").addEventListener("click", closeProductDetails);
+document.getElementById("details-backdrop").addEventListener("click", closeProductDetails);
+
+document.getElementById("details-add").addEventListener("click", () => {
+  if (selectedProductId !== null) addToCart(selectedProductId);
+  closeProductDetails();
+});
 
 document.getElementById("checkout-button").addEventListener("click", () => {
   if (cart.length === 0) {
