@@ -222,3 +222,8 @@ h2 { margin: 0; font: 800 2rem 'Manrope', sans-serif; letter-spacing: -1px; }
 .login-back:hover { color: var(--green); }
 .login-demo-note { margin: 18px 0 0; color: var(--muted); text-align: center; font-size: .76rem; line-height: 1.5; }
 @media (max-width: 480px) { .login-card { padding: 28px 22px; } }
+
+/* Sign-up page link */
+.login-switch { margin: 18px 0 0; color: var(--muted); text-align: center; font-size: .88rem; }
+.login-switch a { color: var(--green); font-weight: 700; }
+.login-switch a:hover { text-decoration: underline; }
