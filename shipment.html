@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Track your ShopEase demo order.">
+  <title>Track Order | ShopEase</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="shipment.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="ShopEase home">Shop<span>Ease</span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="index.html#products">Products</a>
+      <a href="shipment.html" aria-current="page">Track Order</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <main class="shipment-page">
+    <section class="shipment-intro">
+      <p class="eyebrow">SHOPEASE DELIVERY</p>
+      <h1>Track your <span>order.</span></h1>
+      <p>Enter the Order ID you received after placing your demo order.</p>
+    </section>
+
+    <section class="tracking-card" aria-labelledby="tracking-title">
+      <h2 id="tracking-title">Shipment tracking</h2>
+      <form id="tracking-form" class="tracking-form">
+        <label for="order-id">Order ID</label>
+        <div class="tracking-input-row">
+          <input id="order-id" name="orderId" type="text" placeholder="Example: SE12345678" required autocomplete="off">
+          <button class="primary-button" type="submit">Track order</button>
+        </div>
+      </form>
+      <p class="tracking-help">Your demo orders are saved in this browser on this device.</p>
+      <p id="tracking-message" class="tracking-message" role="status" aria-live="polite"></p>
+      <div id="tracking-result" class="tracking-result" hidden>
+        <div class="tracking-order-heading">
+          <div>
+            <p class="eyebrow">ORDER DETAILS</p>
+            <h3 id="result-order-id"></h3>
+          </div>
+          <span id="result-status" class="shipment-status"></span>
+        </div>
+        <p id="result-date" class="tracking-date"></p>
+        <div class="shipment-timeline" id="shipment-timeline">
+          <div class="shipment-step is-current"><span>1</span><div><strong>Order Placed</strong><small>We received your order</small></div></div>
+          <div class="shipment-step"><span>2</span><div><strong>Packed</strong><small>Your items are being prepared</small></div></div>
+          <div class="shipment-step"><span>3</span><div><strong>Shipped</strong><small>Your order has left the store</small></div></div>
+          <div class="shipment-step"><span>4</span><div><strong>Out for Delivery</strong><small>Your order is on its way</small></div></div>
+          <div class="shipment-step"><span>5</span><div><strong>Delivered</strong><small>Order delivered successfully</small></div></div>
+        </div>
+        <div class="tracking-items">
+          <h3>Items in this order</h3>
+          <ul id="result-items"></ul>
+          <div class="tracking-total"><span>Order total</span><strong id="result-total"></strong></div>
+        </div>
+      </div>
+    </section>
+    <a class="shipment-back-link" href="index.html">← Continue shopping</a>
+    <p class="shipment-demo-note">Student project demonstration: shipment status is simulated. No courier service or live delivery updates are connected.</p>
+  </main>
+
+  <footer class="site-footer"><p>© 2026 ShopEase. Student project demo.</p></footer>
+</body>
+</html>

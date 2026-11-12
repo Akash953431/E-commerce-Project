@@ -139,6 +139,41 @@ function closeCart() {
   document.getElementById("cart-panel").setAttribute("aria-hidden", "true");
 }
 
+function placeDemoOrder() {
+  if (cart.length === 0) {
+    alert("Your cart is empty. Add a product first.");
+    return;
+  }
+
+  const orderId = "SE" + Date.now().toString().slice(-8);
+  const order = {
+    orderId,
+    items: cart.map(item => ({
+      name: item.name,
+      quantity: item.quantity,
+      price: item.price
+    })),
+    total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+    status: "Order Placed",
+    placedAt: new Date().toISOString()
+  };
+
+  try {
+    const savedOrders = JSON.parse(localStorage.getItem("shopEaseOrders") || "[]");
+    savedOrders.push(order);
+    localStorage.setItem("shopEaseOrders", JSON.stringify(savedOrders));
+  } catch (error) {
+    alert("Your browser could not save this demo order. Please check browser storage settings.");
+    return;
+  }
+
+  cart = [];
+  updateCart();
+  closeCart();
+  alert("Demo order placed! Your Order ID is " + orderId + ". Save this ID and use Track Order to view it.");
+  window.location.href = "shipment.html?orderId=" + encodeURIComponent(orderId);
+}
+
 productGrid.addEventListener("click", event => {
   const button = event.target.closest("[data-product-id]");
   if (!button) return;
@@ -172,13 +207,7 @@ document.getElementById("details-add").addEventListener("click", () => {
   closeProductDetails();
 });
 
-document.getElementById("checkout-button").addEventListener("click", () => {
-  if (cart.length === 0) {
-    alert("Your cart is empty. Add a product first.");
-    return;
-  }
-  alert("Thank you! This is a demo checkout. No payment has been processed.");
-});
+document.getElementById("checkout-button").addEventListener("click", placeDemoOrder);
 
 displayProducts();
 updateCart();
