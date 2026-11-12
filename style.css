@@ -222,3 +222,88 @@ h2 { margin: 0; font: 800 2rem 'Manrope', sans-serif; letter-spacing: -1px; }
 .login-back:hover { color: var(--green); }
 .login-demo-note { margin: 18px 0 0; color: var(--muted); text-align: center; font-size: .76rem; line-height: 1.5; }
 @media (max-width: 480px) { .login-card { padding: 28px 22px; } }
+
+
+/* Shipment tracking module */
+.shipment-page {
+  min-height: calc(100vh - 150px);
+  padding: 58px 7% 45px;
+  background: var(--cream);
+}
+.shipment-intro { max-width: 760px; margin: 0 auto 28px; text-align: center; }
+.shipment-intro h1 { margin: 0; font: 800 clamp(2.3rem, 5vw, 3.6rem)/1.1 'Manrope', sans-serif; letter-spacing: -2px; }
+.shipment-intro h1 span { color: var(--green); }
+.shipment-intro > p:last-child { color: var(--muted); line-height: 1.7; }
+.tracking-card {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 35px #203b260a;
+}
+.tracking-card > h2 { margin-bottom: 22px; font-size: 1.45rem; }
+.tracking-form label { display: block; margin-bottom: 8px; font-size: .88rem; font-weight: 700; }
+.tracking-input-row { display: flex; gap: 10px; }
+.tracking-input-row input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  outline-color: var(--green);
+}
+.tracking-input-row .primary-button { white-space: nowrap; }
+.tracking-help, .tracking-date { color: var(--muted); font-size: .82rem; }
+.tracking-message { min-height: 20px; margin: 13px 0 0; font-size: .88rem; }
+.tracking-message.is-error { color: #a33b3b; }
+.tracking-result { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--line); }
+.tracking-order-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.tracking-order-heading .eyebrow { margin-bottom: 5px; }
+.tracking-order-heading h3 { margin: 0; font: 800 1.25rem 'Manrope', sans-serif; }
+.shipment-status { padding: 7px 12px; border-radius: 999px; color: var(--green-dark); background: #e7f4e9; font-size: .78rem; font-weight: 700; }
+.shipment-timeline { margin: 25px 0; }
+.shipment-step { position: relative; display: flex; align-items: flex-start; gap: 13px; min-height: 62px; color: #9aa49d; }
+.shipment-step:not(:last-child)::after {
+  position: absolute;
+  top: 30px;
+  left: 14px;
+  width: 2px;
+  height: 32px;
+  background: var(--line);
+  content: "";
+}
+.shipment-step > span {
+  z-index: 1;
+  width: 29px;
+  height: 29px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #dce4dc;
+  border-radius: 50%;
+  background: #fff;
+  font-size: .78rem;
+  font-weight: 700;
+}
+.shipment-step strong, .shipment-step small { display: block; }
+.shipment-step strong { padding-top: 2px; font-size: .9rem; }
+.shipment-step small { margin-top: 4px; font-size: .76rem; }
+.shipment-step.is-complete, .shipment-step.is-current { color: var(--green-dark); }
+.shipment-step.is-complete > span, .shipment-step.is-current > span { border-color: var(--green); color: #fff; background: var(--green); }
+.shipment-step.is-complete:not(:last-child)::after { background: var(--green); }
+.tracking-items { padding-top: 20px; border-top: 1px solid var(--line); }
+.tracking-items h3 { margin: 0 0 12px; font: 700 1rem 'Manrope', sans-serif; }
+.tracking-items ul { margin: 0; padding: 0; list-style: none; }
+.tracking-items li, .tracking-total { display: flex; justify-content: space-between; gap: 15px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: .88rem; }
+.tracking-total { margin-top: 5px; border: 0; font-size: 1rem; }
+.shipment-back-link { display: block; width: fit-content; margin: 22px auto 0; color: var(--green-dark); font-weight: 700; }
+.shipment-demo-note { max-width: 760px; margin: 22px auto 0; color: var(--muted); text-align: center; font-size: .78rem; line-height: 1.6; }
+@media (max-width: 620px) {
+  .shipment-page { padding: 42px 5% 35px; }
+  .tracking-card { padding: 22px 17px; }
+  .tracking-input-row { flex-direction: column; }
+  .tracking-input-row .primary-button { width: 100%; text-align: center; }
+  .tracking-order-heading { align-items: flex-start; flex-direction: column; }
+}
